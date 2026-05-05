@@ -1,0 +1,18 @@
+## Title: Successor
+## Name: Successor
+## Notes: Predicts Mythic+ invite success by scoring applicants with customizable weights based on ilvl, rating, success rate, and key level history. Color-coded using Raider.IO scheme.
+## Author: Straiyan
+## Version: 1.0.0
+## SavedVariables: SuccessorDB
+## Interface: 120005
+## LoadOn: Character
+
+Util/Color.lua
+Successor.lua
+Successor_Core.lua
+Core/ColorUtils.lua
+Core/ScoringEngine.lua
+Core/DataCollector.lua
+Locales/Successor-enUS.lua
+UI/LFGListModule.lua
+UI/Config.lua
