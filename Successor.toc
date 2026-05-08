@@ -8,11 +8,9 @@
 ## LoadOn: Character
 
 Util/Color.lua
+
 Successor.lua
-Successor_Core.lua
-Core/ColorUtils.lua
-Core/ScoringEngine.lua
-Core/DataCollector.lua
 Locales/Successor-enUS.lua
-UI/LFGListModule.lua
 UI/Config.lua
+
+Core/DataCollector.lua

@@ -1,0 +1,10 @@
+{
+	"$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+	"runtime.version": "Lua 5.1",
+	"workspace.checkThirdParty": false,
+	"workspace.library": [
+		"D:/Coding/wow-api/",
+		"D:/Coding/wow-ui-source/"
+	],
+	"workspace.format.enable": false
+}
