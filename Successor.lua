@@ -111,27 +111,50 @@ end)
 -- TODO: move this to config?
 SLASH_SUCCESSOR1 = '/successor'
 SLASH_SUCCESSOR2 = '/succ'
+
+local commands = {
+  config = {
+    command = 'config',
+    command2 = 'settings',
+    help = 'Open settings panel',
+  },
+  reset = {
+    command = 'reset',
+    help = 'Reset weights to defaults',
+  },
+  start = {
+    command = 'start',
+    help = 'Start test dungeon run',
+  },
+  finish = {
+    command = 'end',
+    help = 'End test dungeon run',
+  },
+  hardReset = {
+    command = 'hardreset',
+    help = string.format('Reset all %s data', addonName),
+  },
+}
+
 SlashCmdList['SUCCESSOR'] = function(msg)
   msg = strtrim(msg:lower() or '')
 
-  if msg == 'config' or msg == 'settings' then
+  if msg == commands.config.command or msg == commands.config.command2 then
     ns.SuccessorUI.OpenConfigPanel()
-  elseif msg == 'reset' then
+  elseif msg == commands.reset.command then
     ns.LoadDefaultWeights()
-    print 'Successor: Weights reset to defaults.'
-  elseif msg == 'start' then
+    print(LightBlueText(addonName) .. ': Weights reset to defaults.')
+  elseif msg == commands.start.command then
     ns.StartDungeon()
-  elseif msg == 'end' then
+  elseif msg == commands.finish.command then
     ns.FinishDungeon()
-  elseif msg == 'hardreset' then
+  elseif msg == commands.hardReset.command then
     ns.ResetDB()
-    print 'Successor: DB reset'
+    print(LightBlueText(addonName) .. ': DB reset')
   else
-    print(string.concat(LightBlueText 'Successor', ' Commands:'))
-    print(string.concat(LightBlueText '  /successor config', ' - Open settings panel'))
-    print(string.concat(LightBlueText '  /successor reset', ' - Reset weights to defaults'))
-    print(string.concat(LightBlueText '  /successor start', ' - Start test dungeon run'))
-    print(string.concat(LightBlueText '  /successor end', ' - End test dungeon run'))
-    print(string.concat(LightBlueText '  /successor hardreset', ' - Reset all Successor data'))
+    print(string.concat(LightBlueText(addonName) .. ' Commands:'))
+    for _, c in pairs(commands) do
+      print(string.concat(LightBlueText(string.format(' %s %s', SLASH_SUCCESSOR1, c.command)), string.format(' - %s', c.help)))
+    end
   end
 end

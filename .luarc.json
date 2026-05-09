@@ -5,6 +5,7 @@
 	"workspace.library": [
 		"D:/Coding/wow-api/",
 		"D:/Coding/wow-ui-source/"
+    "${workspaceFolder}"
 	],
 	"workspace.format.enable": false
 }

@@ -107,6 +107,8 @@ function ns.CreateClassLookup()
   }
 end
 
+---Start Tracking of M+ Run
+---@return nil
 function ns.StartDungeon()
   if SuccessorDB.in_run then
     return
@@ -159,7 +161,9 @@ function ns.StartDungeon()
   end
 end
 
--- Used this to gather class info
+---Within M+ Run: Gather class info and add to DungeonCache
+---@param guid string
+---@return nil
 function ns.Inspect(guid)
   if not SuccessorDB.in_run then
     return
@@ -182,6 +186,7 @@ function ns.Inspect(guid)
   end
 end
 
+---Within M+ Run: check if unit dies, update DungeonCache if so
 ---@param unit string
 ---@return nil
 function ns.CheckHealth(unit)
@@ -212,12 +217,32 @@ function ns.FinishDungeon()
   local PlayerCache = SuccessorDB.PlayerCache or {}
   SuccessorDB.PlayerCache = PlayerCache
 
+  -- Get dungeon run stats
   local runStatus = C_ChallengeMode.GetActiveKeystoneInfo()
   local totalDeaths, _ = C_ChallengeMode.GetDeathCount()
 
-  -- Update PlayerCache
+  --[[ Update PlayerCache
+  -- NOTE: Stats to track / save
+  -- Death %
+  -- Deaths per run
+  -- Successful interupts per run
+  -- Role seen
+  -- Timed percemtage
+  -- Per spec or per role stats?
+     PlayerCache = {
+      guid = {
+        DAMAGER = {
+          seenCount
+          interuptsPerRun
+          deathsPerRun
+        }
+      }
+    }
+  --]]
+
   for guid, tab in pairs(DungeonCache.playerData) do
-    print(guid)
+    local p = ns.GetOrCreateCache(guid)
+
     if type(tab) == 'table' then
       for k, v in pairs(tab) do
         print(k .. ' = ' .. v)
@@ -239,8 +264,7 @@ function ns.GetOrCreateCache(guid)
   if not PlayerCache[guid] then
     PlayerCache[guid] = {
       guid = guid,
-      cachedAt = 0,
-      data = nil,
+      firstSeen = date(),
       runs = 1,
     }
   end
