@@ -3,8 +3,8 @@
 	"runtime.version": "Lua 5.1",
 	"workspace.checkThirdParty": false,
 	"workspace.library": [
-		"D:/Coding/wow-api/",
-		"D:/Coding/wow-ui-source/"
+		"~/Projects/wow-api/",
+		"~/Projects/wow-ui-source/",
     "${workspaceFolder}"
 	],
 	"workspace.format.enable": false
